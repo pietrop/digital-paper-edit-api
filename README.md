@@ -38,6 +38,7 @@ npm install
 npm start
 ```
  
+Server API is listening on [`http://localhost:5000`](http://localhost:5000)
 
 ## System Architecture
 <!-- _High level overview of system architecture_ -->
