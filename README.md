@@ -1,7 +1,7 @@
 
 #  Digital Paper Edit - Server API
 
----> _Work in progress_ <--
+---> _Work in progress_  <--
 
 <!-- _One liner + link to confluence page_
 _Screenshot of UI - optional_ -->
