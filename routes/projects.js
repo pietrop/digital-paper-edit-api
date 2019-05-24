@@ -1,10 +1,10 @@
 // 'use strict';
 // HTTP Verbs https://www.restapitutorial.com/lessons/httpmethods.html
 // Error codes https://codeburst.io/know-your-http-status-a-cheat-sheet-for-http-status-codes-5fb43863e589
-
+const cuid = require('cuid');
 // Dummy data to mock the server
 const sampleProjects = require('../sample-data/projects.sample.json');
-const cuid = require('cuid');
+
 // TODO: add date created, and date updated to records ?
 /**
  * Projects
@@ -15,9 +15,6 @@ module.exports = (app) => {
     // TODO: save to db
     console.log('req', req.body);
     // Just  a mock for testing purposes, when connecting to DB, ids are unique and immutable
-    // const lasProjectPositionIndex = sampleProjects.projects.length === 0 ? 0 : sampleProjects.projects.length - 1;
-    // const lastProjectId = sampleProjects.projects.length === 0 ? 0 : sampleProjects.projects[lasProjectPositionIndex].id;
-    // const newProjectId = lastProjectId + 1;
     const project = {
       title: req.body.title,
       description: req.body.description,
@@ -29,7 +26,6 @@ module.exports = (app) => {
     // TODO: send project ID?
     console.log('projects', 'post', '/api/projects ');
     res.status(201).json({ status:'ok', project: project });
-
   });
 
   // index - get projects
