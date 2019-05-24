@@ -13,6 +13,14 @@
   "contributors": [
     ""
   ],
+  "bugs": {
+    "url": "https://github.com/bbc/digital-paper-edit-api/issues"
+  },
+  "homepage": "https://github.com/bbc/digital-paper-edit-api",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbc/digital-paper-edit-api.git"
+  },
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",

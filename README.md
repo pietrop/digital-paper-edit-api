@@ -24,7 +24,7 @@ cd digital-paper-edit-api
 
 Optional step to setup [nvm](https://github.com/nvm-sh/nvm) to use node version 10, otherwise just use node version 10
 ```
-nvm use || nvm install`
+nvm use || nvm install
 ```
 
 in root of project
@@ -32,10 +32,12 @@ in root of project
 npm install
 ```
 
+alternatively for production is also on [npm](https://www.npmjs.com/package/@bbc/digital-paper-edit-api)
+
 ## Usage
 
 ```
-npm start
+npm start:dev
 ```
  
 Server API is listening on [`http://localhost:5000`](http://localhost:5000)

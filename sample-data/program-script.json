@@ -1,0 +1,46 @@
+{
+  "elements": [
+    {
+      "index": 0,
+      "type": "title",
+      "text":"Introduction",
+      "start": 2,
+      "end": 4
+    },
+    {
+      "index": 1,
+      "type": "voice-over",
+      "text":"Some voice over text",
+      "start": 2,
+      "end": 4
+    },
+    {
+      "index": 2,
+      "type": "paper-cut",
+      "start": 2,
+      "end": 4, 
+      "speaker": "Speaker 1",
+      "words":[
+        {
+          "start": 2,
+          "end": 4,
+          "text": "hello"
+        },
+        {
+          "start": 4,
+          "end": 6,
+          "text": "world"
+        }
+      ],
+      "transcriptId": 1,
+      "labelId": [1]
+    },
+    {
+      "index": 1,
+      "type": "note",
+      "text":"Some optional note element to note GVs and B-Rolls for fine cut etc..",
+      "start": 6,
+      "end": 8
+    }
+  ]
+}
