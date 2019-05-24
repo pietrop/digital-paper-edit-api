@@ -13,34 +13,33 @@ app.use(bodyParser.json( { limit: '50MB' } ));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
 });
 
 // TODO: Add API versioning, and change "SDK" React client side
 
-  
 // list all available rotues
 app.get('/', (req, res) => {
-    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    const results = [];
-    // https://stackoverflow.com/questions/14934452/how-to-get-all-registered-routes-in-express/14934933
-    app._router.stack.forEach(function(r){
-        if (r.route && r.route.path){
-            results.push({ 
-              path: r.route.path, 
-              url: url.resolve(fullUrl, r.route.path),
-              methods: r.route.methods 
-            })
-        }
-      })
-    res.json({response: results})
-})
+  const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+  const results = [];
+  // https://stackoverflow.com/questions/14934452/how-to-get-all-registered-routes-in-express/14934933
+  app._router.stack.forEach(function(r) {
+    if (r.route && r.route.path) {
+      results.push({
+        path: r.route.path,
+        url: url.resolve(fullUrl, r.route.path),
+        methods: r.route.methods
+      });
+    }
+  });
+  res.json({ response: results });
+});
 
 // Routes
 require('./routes/projects.js')(app);
@@ -54,6 +53,4 @@ require('./routes/users.js')(app);
 // so that the instance can be terminated? or is not necessary to do this explicitly?
 require('./routes/status.js')(app);
 
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-  
+app.listen(port, () => console.log(`App listening on port ${ port }!`));

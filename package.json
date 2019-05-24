@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "publish:public": "npm publish --access public",    
+    "start:dev": "nodemon index.js"
   },
   "author": "Pietro Passarelli CC0 BBC 2019",
   "contributors": [
