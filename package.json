@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "publish:public": "npm publish --access public",    
+    "publish:public": "npm publish --access public",
     "start:dev": "nodemon index.js"
   },
   "author": "Pietro Passarelli CC0 BBC 2019",
@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cuid": "^2.1.6",
     "express": "^4.16.4",
     "express-graphql": "^0.8.0",
     "formidable": "^1.2.1",
