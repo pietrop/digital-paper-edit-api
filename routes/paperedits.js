@@ -3,7 +3,7 @@ const cuid = require('cuid');
 const sampleTranscript = require('../sample-data/transcript.sample.json');
 const samplePaperEdits = require('../sample-data/paper-edits.sample.json');
 const sampleProgrammeScript = require('../sample-data/programme-script.sample.json');
-
+const sampleProjects = require('../sample-data/projects.sample.json');
 /**
  * Paper-edits
  */
@@ -26,6 +26,7 @@ module.exports = (app) => {
     res.status(201).json({ status:'ok',  paperedit: paperedit });
   });
 
+  // index
   app.get('/api/projects/:projectId/paperedits', (req, res) => {
 
     console.log('Sent list of Paperedits');
@@ -44,19 +45,21 @@ module.exports = (app) => {
     console.log('tmpProject', tmpPaperEdit[0]);
     console.log('projects', 'get', `/api/projects/${ req.params.projectId }/paperedits/${paperEditId}`);
     res.status(200).json({ 
-      paperedit: tmpPaperEdit[0], 
-      title: tmpPaperEdit[0].title, 
-      projectTitle: sampleProjects.projects[0].title });
+      programmeScript: sampleProgrammeScript.programmeScript, 
+      // title: tmpPaperEdit[0].title, 
+      // projectTitle: tmpPaperEdit[0].title 
+    });
   });
 
   // edit
   app.put('/api/projects/:projectId/paperedits/:paperEditId', (req, res) => {
     const paperEditId = req.params.paperEditId;
     const paperEdit = {
-      "id":paperEditId,
+      "id": paperEditId,
       "title": req.body.title,
       "description":req.body.description
     }
+    // const updatedProgramScript = req.body;
     const paperEditIndex = samplePaperEdits.paperedits.findIndex(item => item.id === paperEditId);
     samplePaperEdits.paperedits[paperEditIndex] = paperEdit;
 
