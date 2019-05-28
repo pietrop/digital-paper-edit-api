@@ -66,6 +66,8 @@ module.exports = (app) => {
     // req.body.id || req.params.projectId
     // req.body.description
     console.log('projects', 'put', `/api/projects/${ req.params.projectId }/edit`, req.body);
+    console.log(newProject)
+    console.log(sampleProjects)
     res.status(200).json({ status: 'ok' , project: newProject});
   });
 
