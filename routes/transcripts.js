@@ -1,9 +1,9 @@
 // Dummy data to mock the server
 const path = require('path');
+const cuid = require('cuid');
 const sampleProjects = require('../sample-data/projects.sample.json');
 const sampleTranscripts = require('../sample-data/transcripts.sample.json');
 const sampleTranscript = require('../sample-data/transcript.sample.json');
-const samplePaperEdits = require('../sample-data/paper-edits.sample.json');
 const IncomingForm = require('formidable').IncomingForm;
 /**
  * Transcripts
@@ -38,9 +38,9 @@ module.exports = (app) => {
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/202
 
     // Just  a mock for testing purposes, when connecting to DB, ids are unique and immutable
-    const lasTranscriptPositionIndex = sampleTranscripts.transcripts.length === 0 ? 0 : sampleTranscripts.transcripts.length - 1;
-    const lastTranscriptId = sampleTranscripts.transcripts.length.length === 0 ? 0 : sampleTranscripts.transcripts[lasTranscriptPositionIndex].id;
-    const newTranscriptId = lastTranscriptId + 1;
+    // const lasTranscriptPositionIndex = sampleTranscripts.transcripts.length === 0 ? 0 : sampleTranscripts.transcripts.length - 1;
+    // const lastTranscriptId = sampleTranscripts.transcripts.length.length === 0 ? 0 : sampleTranscripts.transcripts[lasTranscriptPositionIndex].id;
+    const newTranscriptId = cui();
 
     // Workaround for `form.keepFilenames` not working
     // Issue, is if file with same name already in `form.uploadDir`
@@ -64,14 +64,15 @@ module.exports = (app) => {
     // If cb is provided, all fields and files are collected and passed to the callback
     form.parse(req, function(err, fields, file) {
       console.log('fields::', fields);
-      sampleTranscripts.transcripts.push({
+      const newTranscript = {
         title: fields.title,
         description: fields.description,
         id: newTranscriptId,
         status: 'in-progress'
-      });
+      }
+      sampleTranscripts.transcripts.push(newTranscript);
       console.log('transcripts', 'new', `/api/projects/${ projectId }/transcripts`, newTranscriptId);
-      res.status(201).json({ status:'ok', transcriptId: newTranscriptId });
+      res.status(201).json({ status:'ok', transcript: newTranscript });
     });
 
   });
@@ -80,7 +81,7 @@ module.exports = (app) => {
     const projectId = req.params.projectId;
 
     sampleTranscripts.projectTitle = 'Sample Project';
-
+    console.log(sampleTranscripts)
     // 204 - no content if transcript not ready?
     console.log('transcripts', 'get', `/api/projects/${ projectId }/transcripts`);
     res.status(200).json(sampleTranscripts);
@@ -120,13 +121,19 @@ module.exports = (app) => {
   app.put('/api/projects/:projectId/transcripts/:transcriptId', (req, res) => {
     const projectId = req.params.projectId;
     const transcriptId = req.params.transcriptId;
-    console.log(req.body);
-    // to access data
-    // req.body.title
-    // req.body.id || req.params.projectId
-    // req.body.description
-    res.status(200).json({ status:'ok' });
+    
+    const updatedTranscript = {
+      "id": projectId,
+      "title": req.body.title,
+      "description":req.body.description
+    }
+    // TODO: handle query params, if updating transcriptJson 
+    // or just updating title/description etc..
+    const transcriptIndex =  sampleTranscripts.transcripts.findIndex(item => item.id === transcriptId);
+    sampleTranscripts.transcripts[transcriptIndex] = updatedTranscript;
     console.log('transcripts', 'edit', `/api/projects/${ projectId }/transcripts/${ transcriptId }`, req.body);
+    console.log(updatedTranscript)
+    res.status(200).json({ status:'ok' , transcript: updatedTranscript});
   });
 
   // delete
