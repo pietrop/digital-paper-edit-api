@@ -1,16 +1,19 @@
-[
-  {
-    "id": 0,
-    "start": 50.58,
-    "end": 51.65,
-    "labelId": 0,
-    "note": "optional example text description for an annotation"
-  },
-  {
-    "id": 1,
-    "start": 14.38,
-    "end": 18.14,
-    "labelId": 1,
-    "note": "optional example text description for an annotation - TEST 2"
-  }
-]
+{
+  "annotations":
+  [
+    {
+      "id":  "0idcjw29xii80000ird74yb19swa",
+      "start": 50.58,
+      "end": 51.65,
+      "labelId": "729cjw29xii80000ird74yb19swa",
+      "note": "optional example text description for an annotation"
+    },
+    {
+      "id": "1idcjw29xii80000ird74yb19swa",
+      "start": 14.38,
+      "end": 18.14,
+      "labelId": "129cjw29xii80000ird74yb19swa",
+      "note": "optional example text description for an annotation - TEST 2"
+    }
+  ]
+}
