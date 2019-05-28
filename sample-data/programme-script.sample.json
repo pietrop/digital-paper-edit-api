@@ -1,5 +1,8 @@
-{
-  "elements": [
+{ 
+  "programmeScript":{
+    "id": "dldlld292929",
+  "title": "Some programme script tile",
+    "elements": [
     {
       "index": 0,
       "type": "title",
@@ -33,7 +36,7 @@
         }
       ],
       "transcriptId": 1,
-      "labelId": [1]
+      "labelId": ["129cjw29xii80000ird74yb19swa"]
     },
     {
       "index": 1,
@@ -43,4 +46,5 @@
       "end": 8
     }
   ]
+}
 }
