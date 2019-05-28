@@ -1,8 +1,8 @@
 // Dummy data to mock the server
 const cuid = require('cuid');
-const sampleProjects = require('../sample-data/projects.sample.json');
-const sampleTranscripts = require('../sample-data/transcripts.sample.json');
+const sampleTranscript = require('../sample-data/transcript.sample.json');
 const samplePaperEdits = require('../sample-data/paper-edits.sample.json');
+const sampleProgrammeScript = require('../sample-data/programme-script.sample.json');
 
 /**
  * Paper-edits
@@ -43,7 +43,10 @@ module.exports = (app) => {
     });
     console.log('tmpProject', tmpPaperEdit[0]);
     console.log('projects', 'get', `/api/projects/${ req.params.projectId }/paperedits/${paperEditId}`);
-    res.status(200).json({ paperedit: tmpPaperEdit[0] });
+    res.status(200).json({ 
+      paperedit: tmpPaperEdit[0], 
+      title: tmpPaperEdit[0].title, 
+      projectTitle: sampleProjects.projects[0].title });
   });
 
   // edit
@@ -55,7 +58,7 @@ module.exports = (app) => {
       "description":req.body.description
     }
     const paperEditIndex = samplePaperEdits.paperedits.findIndex(item => item.id === paperEditId);
-    sampleProjects.projects[paperEditIndex] = paperEdit;
+    samplePaperEdits.paperedits[paperEditIndex] = paperEdit;
 
     // TODO: db
     // to access data
@@ -73,7 +76,7 @@ module.exports = (app) => {
     const paperEditToDelete = samplePaperEdits.paperedits.filter((p) => {
       return p.id === paperEditId;
     })[0];
-    samplePaperEdits.paperedits = sampleProjects.projects.filter((p) => {
+    samplePaperEdits.paperedits = samplePaperEdits.paperedits.filter((p) => {
       return p.id !== paperEditId;
     });
      // Tmp to testing UI
