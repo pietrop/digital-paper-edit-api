@@ -37,7 +37,7 @@ alternatively for production is also on [npm](https://www.npmjs.com/package/@bbc
 ## Usage
 
 ```
-npm start:dev
+npm run start:dev
 ```
  
 Server API is listening on [`http://localhost:5000`](http://localhost:5000)
