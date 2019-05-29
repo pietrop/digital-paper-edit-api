@@ -34,13 +34,31 @@ npm install
 
 alternatively for production is also on [npm](https://www.npmjs.com/package/@bbc/digital-paper-edit-api)
 
-## Usage
+## Usage - development
 
 ```
 npm run start:dev
 ```
  
 Server API is listening on [`http://localhost:5000`](http://localhost:5000)
+
+## Usage - production
+
+
+The project is also publicly available in the npm registry [`@bbc/digital-paper-edit-api`](https://www.npmjs.com/package/@bbc/digital-paper-edit-api)
+
+ you can add it to your project
+```
+npm install @bbc/digital-paper-edit-api
+```
+
+and eg in an express server you can serve the static build as follows
+
+```
+require('@bbc/digital-paper-edit-api');
+```
+
+See notes in [infrastructure repository](https://github.com/bbc/digital-paper-edit-infrastructure) on [Importing JS modules without specifying export](https://github.com/bbc/digital-paper-edit-infrastructure/blob/master/docs/notes/2019-05-24-imports-without-exports.md) for more details on this work.
 
 ## System Architecture
 <!-- _High level overview of system architecture_ -->
