@@ -11,7 +11,7 @@ By submitting code as an individual or as an entity you agree that your code is 
 
 2. [Fork the repo](https://help.github.com/articles/fork-a-repo/)
 
-3. Before working on a feature **always** create a new branch first. Createa a branch with a meaningful name.
+3. Before working on a feature **always** create a new branch first. Create a branch with a meaningful name.
 4. Branches should be short lived - consider doing multiple PR breaking down functionalities as opposed to one big change.
 5. If you've added code that should be tested, add tests, if you need help with automated testing, feel free to raise an [issue](https://github.com/bbc/digital-paper-edit-api/issues/new?template=feature_request.md).
 6. Ensure the test suite passes.
