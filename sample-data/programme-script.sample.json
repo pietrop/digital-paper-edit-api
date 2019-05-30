@@ -4,6 +4,7 @@
     "title": "Paperedit title One",
     "elements": [
     {
+      "id":"1229929299292",
       "index": 0,
       "type": "title",
       "text":"Introduction",
@@ -11,6 +12,7 @@
       "end": 4
     },
     {
+      "id":"2229929299292",
       "index": 1,
       "type": "voice-over",
       "text":"Some voice over text",
@@ -18,6 +20,7 @@
       "end": 4
     },
     {
+      "id":"3229929299292",
       "index": 2,
       "type": "paper-cut",
       "start": 2,
@@ -39,6 +42,7 @@
       "labelId": ["129cjw29xii80000ird74yb19swa"]
     },
     {
+      "id":"4229929299292",
       "index": 1,
       "type": "note",
       "text":"Some optional note element to note GVs and B-Rolls for fine cut etc..",
