@@ -25,7 +25,7 @@ module.exports = (app, version) => {
     const response = {
       // projectTitle: 'Sample Project Title',
       // projectDescription: 'sampleProjectDescription',
-      annotations: sampleAnnotations.annotations,
+       ...sampleAnnotations,
       // TODO: Annotations returns transcript as well?
       // transcript: sampleTranscript,
       // transcriptTitle: 'Ted Talk Kate',

@@ -96,6 +96,7 @@ module.exports = (app) => {
     const transcriptId = req.params.transcriptId;
     console.log('query', req.query);
     const sampleTranscript2 = {
+      id: transcriptId,
       projectTitle: 'Sample Project',
       transcriptTitle: 'Ted Talk Kate',
       description: 'some optional description',
