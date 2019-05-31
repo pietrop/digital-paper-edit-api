@@ -1,9 +1,16 @@
 // Dummy data to mock the server
 const path = require('path');
 const cuid = require('cuid');
-const sampleProjects = require('../sample-data/projects.sample.json');
-const sampleTranscripts = require('../sample-data/transcripts/transcripts.sample.json');
+const sampleTranscriptsIndex = require('../sample-data/transcripts/transcripts.sample.json');
+
 const sampleTranscript = require('../sample-data/transcripts/transcript.sample.json');
+
+const sampleTranscriptKate = require('../sample-data/transcripts/kate.transcript.sample.json');
+const sampleTranscriptMorgan = require('../sample-data/transcripts/morgan.transcript.sample.json');
+const sampleTranscriptIvan = require('../sample-data/transcripts/ivan.transcript.sample.json');
+
+const sampleTranscriptsList = [ sampleTranscriptKate, sampleTranscriptMorgan, sampleTranscriptIvan];
+
 const IncomingForm = require('formidable').IncomingForm;
 /**
  * Transcripts
@@ -38,9 +45,9 @@ module.exports = (app) => {
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/202
 
     // Just  a mock for testing purposes, when connecting to DB, ids are unique and immutable
-    // const lasTranscriptPositionIndex = sampleTranscripts.transcripts.length === 0 ? 0 : sampleTranscripts.transcripts.length - 1;
-    // const lastTranscriptId = sampleTranscripts.transcripts.length.length === 0 ? 0 : sampleTranscripts.transcripts[lasTranscriptPositionIndex].id;
-    const newTranscriptId = cui();
+    // const lasTranscriptPositionIndex = sampleTranscriptsIndex.transcripts.length === 0 ? 0 : sampleTranscriptsIndex.transcripts.length - 1;
+    // const lastTranscriptId = sampleTranscriptsIndex.transcripts.length.length === 0 ? 0 : sampleTranscriptsIndex.transcripts[lasTranscriptPositionIndex].id;
+    const newTranscriptId = cuid();
 
     // Workaround for `form.keepFilenames` not working
     // Issue, is if file with same name already in `form.uploadDir`
@@ -70,7 +77,7 @@ module.exports = (app) => {
         id: newTranscriptId,
         status: 'in-progress'
       }
-      sampleTranscripts.transcripts.push(newTranscript);
+      sampleTranscriptsIndex.transcripts.push(newTranscript);
       console.log('transcripts', 'new', `/api/projects/${ projectId }/transcripts`, newTranscriptId);
       res.status(201).json({ status:'ok', transcript: newTranscript });
     });
@@ -79,12 +86,13 @@ module.exports = (app) => {
   // Index
   app.get('/api/projects/:projectId/transcripts', (req, res) => {
     const projectId = req.params.projectId;
-
-    sampleTranscripts.projectTitle = 'Sample Project';
-    console.log(sampleTranscripts)
+    // TODO: change in the SDK for this to be made as separate call to Projects end point using projectId
+    // and join results there
+    sampleTranscriptsIndex.projectTitle = 'Sample Project';
+    console.log(sampleTranscriptsIndex)
     // 204 - no content if transcript not ready?
     console.log('transcripts', 'get', `/api/projects/${ projectId }/transcripts`);
-    res.status(200).json(sampleTranscripts);
+    res.status(200).json(sampleTranscriptsIndex);
   });
 
   // show
@@ -95,26 +103,36 @@ module.exports = (app) => {
     const projectId = req.params.projectId;
     const transcriptId = req.params.transcriptId;
     console.log('query', req.query);
-    const sampleTranscript2 = {
-      id: transcriptId,
-      projectTitle: 'Sample Project',
-      transcriptTitle: 'Ted Talk Kate',
-      description: 'some optional description',
-      transcript: sampleTranscript,
-      url: 'https://download.ted.com/talks/KateDarling_2018S-950k.mp4'
-    };
-    console.log('true', req.query.transcriptJson);
+
+    let tmpTranscript = sampleTranscriptsList.find((t) => {
+      return t.id === transcriptId;
+    });
+    console.log('tmpTranscript',tmpTranscript.title)
+    if(!tmpTranscript){
+      // TODO: move these info in sample transcript
+      tmpTranscript =  {
+        id: transcriptId,
+        // TODO: make separate call to projects in SDK to remove this info here
+        // and then aggregate there
+        projectTitle: 'Sample Project',
+        transcriptTitle: 'Ted Talk Kate',
+        description: 'some optional description',
+        transcript: sampleTranscript,
+        url: 'https://download.ted.com/talks/KateDarling_2018S-950k.mp4'
+      };
+    }
+    // console.log('true', req.query.transcriptJson);
 
     // `transcriptJson=false` doesn't return the transcriptJson
     // if param is set to true or not specified then it returns it
     if (req.query.transcriptJson && req.query.transcriptJson.toString() === 'false') {
-      console.log('true', req.query.transcriptJson);
+      // console.log('true', req.query.transcriptJson);
       // TODO: get title of transcript from DB
-      delete sampleTranscript2.transcript;
+      // delete sampleTranscript2.transcript;
     }
     // TODO: change this
     console.log('transcripts', 'get', `/api/projects/${ projectId }/transcripts/${ transcriptId }`);
-    res.status(200).json(sampleTranscript2);
+    res.status(200).json(tmpTranscript);
 
   });
 
@@ -130,8 +148,8 @@ module.exports = (app) => {
     }
     // TODO: handle query params, if updating transcriptJson 
     // or just updating title/description etc..
-    const transcriptIndex =  sampleTranscripts.transcripts.findIndex(item => item.id === transcriptId);
-    sampleTranscripts.transcripts[transcriptIndex] = updatedTranscript;
+    const transcriptIndex =  sampleTranscriptsIndex.transcripts.findIndex(item => item.id === transcriptId);
+    sampleTranscriptsIndex.transcripts[transcriptIndex] = updatedTranscript;
     console.log('transcripts', 'edit', `/api/projects/${ projectId }/transcripts/${ transcriptId }`, req.body);
     console.log(updatedTranscript)
     res.status(200).json({ status:'ok' , transcript: updatedTranscript});
@@ -142,9 +160,9 @@ module.exports = (app) => {
     const projectId = req.params.projectId;
     const transcriptId = req.params.transcriptId;
 
-    delete sampleTranscripts.transcripts[transcriptId];
+    delete sampleTranscriptsIndex.transcripts[transcriptId];
 
-    sampleTranscripts.transcripts = sampleTranscripts.transcripts.filter((t) => {
+    sampleTranscriptsIndex.transcripts = sampleTranscriptsIndex.transcripts.filter((t) => {
       return t.id !== transcriptId;
     });
 

@@ -2,7 +2,6 @@
 const cuid = require('cuid');
 const samplePaperEdits = require('../sample-data/paper-edits.sample.json');
 const sampleProgrammeScript = require('../sample-data/programme-script.sample.json');
-const sampleProjects = require('../sample-data/projects.sample.json');
 /**
  * Paper-edits
  */
