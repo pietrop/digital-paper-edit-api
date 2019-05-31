@@ -58,7 +58,7 @@ module.exports = (app) => {
         "description":req.body.description
     }
     const projectIndex = sampleProjects.projects.findIndex(item => item.id === projectId);
-    sampleProjects.projects[projectId] = newProject;
+    sampleProjects.projects[projectIndex] = newProject;
 
     // TODO: db
     // to access data
@@ -67,7 +67,6 @@ module.exports = (app) => {
     // req.body.description
     console.log('projects', 'put', `/api/projects/${ req.params.projectId }/edit`, req.body);
     console.log(newProject)
-    console.log(sampleProjects)
     res.status(200).json({ status: 'ok' , project: newProject});
   });
 
