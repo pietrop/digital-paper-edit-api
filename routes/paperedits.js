@@ -1,6 +1,5 @@
 // Dummy data to mock the server
 const cuid = require('cuid');
-const sampleTranscript = require('../sample-data/transcript.sample.json');
 const samplePaperEdits = require('../sample-data/paper-edits.sample.json');
 const sampleProgrammeScript = require('../sample-data/programme-script.sample.json');
 const sampleProjects = require('../sample-data/projects.sample.json');

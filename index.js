@@ -47,7 +47,6 @@ require('./routes/paperedits.js')(app);
 require('./routes/transcripts.js')(app);
 require('./routes/labels.js')(app);
 require('./routes/annotations.js')(app);
-require('./routes/users.js')(app);
 // TODO: status should probably not always return ok?
 // eg if server is failing/crashed should return something else
 // so that the instance can be terminated? or is not necessary to do this explicitly?

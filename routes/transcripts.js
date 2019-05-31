@@ -2,8 +2,8 @@
 const path = require('path');
 const cuid = require('cuid');
 const sampleProjects = require('../sample-data/projects.sample.json');
-const sampleTranscripts = require('../sample-data/transcripts.sample.json');
-const sampleTranscript = require('../sample-data/transcript.sample.json');
+const sampleTranscripts = require('../sample-data/transcripts/transcripts.sample.json');
+const sampleTranscript = require('../sample-data/transcripts/transcript.sample.json');
 const IncomingForm = require('formidable').IncomingForm;
 /**
  * Transcripts
