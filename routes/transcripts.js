@@ -102,7 +102,6 @@ module.exports = (app) => {
   app.get('/api/projects/:projectId/transcripts/:transcriptId', (req, res) => {
     const projectId = req.params.projectId;
     const transcriptId = req.params.transcriptId;
-    console.log('query', req.query);
 
     let tmpTranscript = sampleTranscriptsList.find((t) => {
       return t.id === transcriptId;
@@ -122,8 +121,6 @@ module.exports = (app) => {
         url: 'https://download.ted.com/talks/KateDarling_2018S-950k.mp4'
       };
     }
-    console.log('tmpTranscript',tmpTranscript.title)
-    // console.log('true', req.query.transcriptJson);
 
     // `transcriptJson=false` doesn't return the transcriptJson
     // if param is set to true or not specified then it returns it
