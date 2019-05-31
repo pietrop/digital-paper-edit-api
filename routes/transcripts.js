@@ -107,20 +107,22 @@ module.exports = (app) => {
     let tmpTranscript = sampleTranscriptsList.find((t) => {
       return t.id === transcriptId;
     });
-    console.log('tmpTranscript',tmpTranscript.title)
+
+    // tmp workaround for testing, when requesting transcript that doesn't match id
     if(!tmpTranscript){
       // TODO: move these info in sample transcript
       tmpTranscript =  {
         id: transcriptId,
         // TODO: make separate call to projects in SDK to remove this info here
         // and then aggregate there
-        projectTitle: 'Sample Project',
-        transcriptTitle: 'Ted Talk Kate',
+        // projectTitle: 'Sample Project',
+        title: 'Ted Talk Kate',
         description: 'some optional description',
         transcript: sampleTranscript,
         url: 'https://download.ted.com/talks/KateDarling_2018S-950k.mp4'
       };
     }
+    console.log('tmpTranscript',tmpTranscript.title)
     // console.log('true', req.query.transcriptJson);
 
     // `transcriptJson=false` doesn't return the transcriptJson
