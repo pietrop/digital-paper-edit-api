@@ -24,7 +24,7 @@ module.exports = (app) => {
     // TODO: get file name from react
     const form = new IncomingForm();
     // form.encoding = 'utf-8';
-    form.uploadDir = __dirname;
+    form.uploadDir = path.join(__dirname, '..','tmpMedia');
     // If you want the files written to form.uploadDir to include the extensions of the original files, set this property to true.
     form.keepExtensions = true;
     // https://github.com/felixge/node-formidable/pull/488
