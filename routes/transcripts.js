@@ -8,8 +8,10 @@ const sampleTranscript = require('../sample-data/transcripts/transcript.sample.j
 const sampleTranscriptKate = require('../sample-data/transcripts/kate.transcript.sample.json');
 const sampleTranscriptMorgan = require('../sample-data/transcripts/morgan.transcript.sample.json');
 const sampleTranscriptIvan = require('../sample-data/transcripts/ivan.transcript.sample.json');
+const sampleTranscriptInProgress = require('../sample-data/transcripts/in-progress.transcript.sample.json');
+// const sampleTranscriptError = require('../sample-data/transcripts/in-progress.transcript.sample.json');
 
-const sampleTranscriptsList = [ sampleTranscriptKate, sampleTranscriptMorgan, sampleTranscriptIvan];
+const sampleTranscriptsList = [ sampleTranscriptKate, sampleTranscriptMorgan, sampleTranscriptIvan, sampleTranscriptInProgress];
 
 const IncomingForm = require('formidable').IncomingForm;
 /**
@@ -115,6 +117,7 @@ module.exports = (app) => {
         // TODO: make separate call to projects in SDK to remove this info here
         // and then aggregate there
         // projectTitle: 'Sample Project',
+        status: 'error',
         title: 'Ted Talk Kate',
         description: 'some optional description',
         transcript: sampleTranscript,

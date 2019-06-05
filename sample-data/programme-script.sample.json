@@ -23,8 +23,8 @@
       "id":"3229929299292",
       "index": 2,
       "type": "paper-cut",
-      "start": 2,
-      "end": 4, 
+      "start": 30,
+      "end": 40, 
       "speaker": "Speaker 1",
       "words":[
         {
@@ -38,7 +38,7 @@
           "text": "world"
         }
       ],
-      "transcriptId": 1,
+      "transcriptId": "39cjw29xii80000ird74yb19swa",
       "labelId": ["129cjw29xii80000ird74yb19swa"]
     },
     {
