@@ -1,5 +1,5 @@
 {
-  "name": "@bbc/digital-paper-edit-api",
+  "name": "digital-paper-edit-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

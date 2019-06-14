@@ -84,3 +84,7 @@ typings/
 *.vtt
 *.ttml
 *.itt
+
+SOURCES/
+SPECS/
+*.service
