@@ -13,7 +13,7 @@ app.use(bodyParser.json( { limit: '50MB' } ));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-const port = process.env.PORT || 7080;
+const port = process.env.PORT || 8080;
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
