@@ -99,8 +99,8 @@ module.exports = (app) => {
 
   // show
   // exposes route + one query param option to get transcript data without transcript json
-  // http://localhost:5000/api/projects/1/transcripts/1
-  // http://localhost:5000/api/projects/1/transcripts/1?transcriptJson=false
+  // http://localhost:7080/api/projects/1/transcripts/1
+  // http://localhost:7080/api/projects/1/transcripts/1?transcriptJson=false
   app.get('/api/projects/:projectId/transcripts/:transcriptId', (req, res) => {
     const projectId = req.params.projectId;
     const transcriptId = req.params.transcriptId;

@@ -40,7 +40,7 @@ alternatively for production is also on [npm](https://www.npmjs.com/package/@bbc
 npm run start:dev
 ```
  
-Server API is listening on [`http://localhost:5000`](http://localhost:5000)
+Server API is listening on [`http://localhost:7080`](http://localhost:7080)
 
 ## Usage - production
 
