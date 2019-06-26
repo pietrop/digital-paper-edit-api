@@ -5,6 +5,8 @@ const url = require('url');
 const app = express();
 const router = express.Router();
 
+require("./config");
+
 // https://stackoverflow.com/questions/24543847/req-body-empty-on-posts
 // https://github.com/expressjs/body-parser#limit
 // > Controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the bytes library for parsing. Defaults to '100kb'.
