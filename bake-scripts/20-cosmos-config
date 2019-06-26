@@ -9,7 +9,7 @@ import os
 
 NAME = "digital-paper-edit-api"
 UID = pwd.getpwnam(NAME).pw_uid
-GID = grp.getgrnam(NAME).gr_uid
+GID = grp.getgrnam(NAME).gr_gid
 
 
 def write_env(content, path):
