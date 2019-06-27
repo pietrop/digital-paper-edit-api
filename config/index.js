@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const fs = require('fs');
 const result = dotenv.config()
 
 if (result.error) {
