@@ -12,12 +12,15 @@ const topicArn = [
   process.env.SNS_TOPIC
 ].join(":")
 
-exports.publish = (msg, cb) => {
+const publish = (msg, cb) => {
   let params = {
     Message: msg,
     TopicArn: topicArn
   }
+
   sns.publish(params, () => {
     return cb();
   })
 }
+
+module.exports = { publish }
