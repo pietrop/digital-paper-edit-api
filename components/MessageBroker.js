@@ -17,5 +17,7 @@ exports.publish = (msg, cb) => {
     Message: msg,
     TopicArn: topicArn
   }
-  sns.publish(params, cb(err, data))
+  sns.publish(params, () => {
+    return cb();
+  })
 }
