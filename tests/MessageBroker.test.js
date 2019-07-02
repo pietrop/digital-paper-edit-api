@@ -11,7 +11,7 @@ describe('TestMessageBrokerComponent', () => {
         this.sandbox = sinon.createSandbox()
         this.publishMessageSpy = sinon.spy();
         this.AWSMock = AWSMock
-        this.AWSMock.mock('SNS', 'publish', this.publishMessageSpy)
+        this.AWSMock.mock('SNS', 'publish', "test-message")
 
         this.msgBody = "test"
     })
