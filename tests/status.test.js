@@ -1,28 +1,22 @@
 const chai = require('chai');
-const assert = require('chai').assert;
-const expect = require('chai').expect;
+const { assert, expect } = require('chai');
+const AWSMock = require('aws-sdk-mock');
 const AWS = require('aws-sdk');
-const sinon = require('sinon');
+
 const sinonChai = require('sinon-chai');
 const { mockReq, mockRes } = require('sinon-express-mock');
 const { healthCheck, sendMessage } = require('../routes/status');
 
 chai.use(sinonChai);
+AWSMock.setSDKInstance(AWS);
 
-describe('TestStatusRoutes', () => {
-  beforeEach('setup sandbox', () => {
-    this.sandbox = sinon.createSandbox();
-    this.sandbox.stub(AWS, 'SNS');
-
+describe('Test Status API', () => {
+  beforeEach('setup mocked objects', () => {
     const request = {
       body: {},
     };
-
     this.req = mockReq(request);
     this.res = mockRes();
-  });
-  afterEach('restore sandbox', () => {
-    this.sandbox.restore();
   });
 
   describe('healthCheck()', () => {
@@ -31,16 +25,28 @@ describe('TestStatusRoutes', () => {
       expect(this.res.sendStatus).to.be.calledWith(200);
     });
   });
+});
+
+describe('Test SNS API', () => {
+  beforeEach('setup mock objects', () => {
+    AWSMock.mock('SNS', 'publish', (err, cb) => {
+      cb();
+    });
+    const request = {
+      body: {},
+    };
+    this.req = mockReq(request);
+    this.res = mockRes();
+  });
+
+  afterEach('restore sandbox', () => {
+    AWSMock.restore('SNS', 'publish');
+  });
 
   describe('sendMessage()', () => {
     it('Should successfully send message', () => {
       sendMessage(this.req, this.res);
       expect(this.res.sendStatus).to.be.calledWith(200);
-    });
-
-    it('Should fail to send message', () => {
-      sendMessage(this.req, this.res);
-      expect(this.res.sendStatus).to.be.calledWith(500);
     });
   });
 });

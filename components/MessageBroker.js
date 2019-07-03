@@ -12,16 +12,17 @@ const getTopicArn = () => {
 };
 
 const publish = (msg, cb) => {
-  const sns = new AWS.SNS({ apiVersion: '2010-03-31' });
-  // const awsConfig = AWS.config;
-  // awsConfig.update({region: process.env.AWS_REGION});
+  const sns = new AWS.SNS({
+    apiVersion: '2010-03-31',
+    region: process.env.AWS_REGION,
+  });
+
   const params = {
     Message: msg,
     TopicArn: getTopicArn(),
   };
-  console.log(sns);
 
-  sns.publish(params, () => cb());
+  return sns.publish(params, (err, data) => cb(err, data));
 };
 
 module.exports = { publish };

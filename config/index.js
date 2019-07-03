@@ -1,12 +1,13 @@
 const dotenv = require('dotenv');
 const fs = require('fs');
-const result = dotenv.config()
+
+const result = dotenv.config();
 
 if (result.error) {
-  throw result.error
+  throw result.error;
 }
-const envConfig = dotenv.parse(fs.readFileSync('.env.override'))
+const envConfig = dotenv.parse(fs.readFileSync('.env.override'));
 
-for (let k in envConfig) {
-  process.env[k] = envConfig[k]
+for (const k in envConfig) {
+  process.env[k] = envConfig[k];
 }
