@@ -8,6 +8,6 @@ if (result.error) {
 }
 const envConfig = dotenv.parse(fs.readFileSync('.env.override'));
 
-for (const k in envConfig) {
+envConfig.forEach((k) => {
   process.env[k] = envConfig[k];
-}
+});

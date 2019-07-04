@@ -3,11 +3,13 @@ const { assert, expect } = require('chai');
 const AWSMock = require('aws-sdk-mock');
 const AWS = require('aws-sdk');
 
+const chaiAsPromise = require('chai-as-promised');
 const sinonChai = require('sinon-chai');
 const { mockReq, mockRes } = require('sinon-express-mock');
 const { healthCheck, sendMessage } = require('../routes/status');
 
 chai.use(sinonChai);
+chai.use(chaiAsPromise);
 AWSMock.setSDKInstance(AWS);
 
 describe('Test Status API', () => {
@@ -27,11 +29,9 @@ describe('Test Status API', () => {
   });
 });
 
-describe('Test SNS API', () => {
+describe.only('Test SNS API', () => {
   beforeEach('setup mock objects', () => {
-    AWSMock.mock('SNS', 'publish', (err, cb) => {
-      cb();
-    });
+    AWSMock.mock('SNS', 'publish', () => 'success');
     const request = {
       body: {},
     };

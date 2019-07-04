@@ -30,7 +30,7 @@ describe('Test MessageBroker Component', () => {
 
   describe('When publish() is called', () => {
     it('Should successfully send message', () => {
-      publish(this.msgBody, data => data);
+      publish(this.msgBody);
       assert.isTrue(this.publishSpy.calledOnce, 'should have called publish()');
       expect(this.publishSpy).to.have.been.calledWith(this.expectedParams);
     });

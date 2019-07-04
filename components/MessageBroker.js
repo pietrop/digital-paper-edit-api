@@ -1,17 +1,13 @@
 const AWS = require('aws-sdk');
 
-const getTopicArn = () => {
-  const topicArn = [
-    'arn:aws:sns',
-    process.env.AWS_REGION,
-    process.env.AWS_ACCOUNT,
-    process.env.SNS_TOPIC,
-  ].join(':');
+const getTopicArn = () => [
+  'arn:aws:sns',
+  process.env.AWS_REGION,
+  process.env.AWS_ACCOUNT,
+  process.env.SNS_TOPIC,
+].join(':');
 
-  return topicArn;
-};
-
-const publish = (msg, cb) => {
+const publish = (msg) => {
   const sns = new AWS.SNS({
     apiVersion: '2010-03-31',
     region: process.env.AWS_REGION,
@@ -22,7 +18,17 @@ const publish = (msg, cb) => {
     TopicArn: getTopicArn(),
   };
 
-  return sns.publish(params, (err, data) => cb(err, data));
+  const promisePublish = new Promise((resolve, reject) => {
+    sns.publish(params, (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+
+  return promisePublish;
 };
 
 module.exports = { publish };
