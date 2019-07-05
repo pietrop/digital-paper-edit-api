@@ -45,7 +45,7 @@ describe.only('Test SNS API', () => {
 
   describe('sendMessage()', () => {
     it('Should successfully send message', () => {
-      sendMessage(this.req, this.res);
+      sendMessage(this.req, this.res).then(data => console.log(data));
       expect(this.res.sendStatus).to.be.calledWith(200);
     });
   });

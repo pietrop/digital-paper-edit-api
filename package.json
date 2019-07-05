@@ -29,13 +29,10 @@
     "cuid": "^2.1.6",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "express-graphql": "^0.8.0",
-    "formidable": "^1.2.1",
-    "graphql": "^14.2.1"
+    "formidable": "^1.2.1"
   },
   "devDependencies": {
     "aws-sdk-mock": "^4.5.0",
-    "babel-eslint": "^10.0.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^5.16.0",
