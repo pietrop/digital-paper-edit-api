@@ -1,11 +1,11 @@
-const MessageBroker = require('../components/MessageBroker');
+const messageBroker = require('../lib/messageBroker');
 
 module.exports = {
   healthCheck: (req, res) => {
     res.sendStatus(200);
   },
   sendMessage: (req, res) => {
-    MessageBroker.publish('Hello from Digital Paper Edit API')
+    messageBroker.publish('Hello from Digital Paper Edit API')
       .then((data) => {
         res.status(200).json({ message: data });
       })
