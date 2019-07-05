@@ -31,7 +31,7 @@ describe('Test Status API', () => {
 
 describe.only('Test SNS API', () => {
   beforeEach('setup mock objects', () => {
-    AWSMock.mock('SNS', 'publish', () => 'success');
+    AWSMock.mock('SNS', 'publish', 'Success');
     const request = {
       body: {},
     };
@@ -45,8 +45,8 @@ describe.only('Test SNS API', () => {
 
   describe('sendMessage()', () => {
     it('Should successfully send message', () => {
-      sendMessage(this.req, this.res).then(data => console.log(data));
-      expect(this.res.sendStatus).to.be.calledWith(200);
+      sendMessage(this.req, this.res);
+      expect(this.res.status).to.be.calledOnceWith(200);
     });
   });
 });

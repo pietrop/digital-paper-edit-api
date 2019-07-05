@@ -7,11 +7,10 @@ module.exports = {
   sendMessage: (req, res) => {
     MessageBroker.publish('Hello from Digital Paper Edit API')
       .then((data) => {
-        res.sendStatus(200).json({ status: 'ok', message: data });
+        res.status(200).json({ message: data });
       })
       .catch((err) => {
-        console.log(err);
-        res.sendStatus(500).json({ status: 'not ok', message: err });
+        res.status(500).json({ error: err });
       });
   },
 };

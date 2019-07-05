@@ -22,9 +22,8 @@ const publish = (msg) => {
     sns.publish(params, (err, data) => {
       if (err) {
         reject(err);
-      } else {
-        resolve(data);
       }
+      resolve(data);
     });
   });
 
