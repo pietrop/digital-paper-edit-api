@@ -1,9 +1,18 @@
-// health check on /status to 200 is needed for cosmos AWS deployment
+const messageBroker = require('../lib/messageBroker');
 
-// TODO: add some server error handling that if it's having issues
-// it does not return 200
-module.exports = (app) => {
-  app.get('/status', (req, res) => {
+module.exports = {
+  healthCheck: (req, res) => {
     res.sendStatus(200);
-  });
+  },
+  sendMessage: (req, res) => {
+    messageBroker.publish('Hello from Digital Paper Edit API', (err, data) => {
+      if (err) {
+        console.log('Error from publish: ', err);
+        res.status(500).json({ err });
+      } else {
+        console.log('Data from publish: ', data);
+        res.status(200).json({ message: data });
+      }
+    });
+  },
 };
