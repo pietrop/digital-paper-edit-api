@@ -1,10 +1,7 @@
-// 'use strict';
-const url = require('url');
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const router = express.Router();
 
 const port = process.env.PORT || 8080;
 
@@ -23,29 +20,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  const fullUrl = `${ req.protocol }://${ req.get('host') }${ req.originalUrl }`;
-  const results = [];
-  // https://stackoverflow.com/questions/14934452/how-to-get-all-registered-routes-in-express/14934933
-  app._router.stack.forEach((r) => {
-    if (r.route && r.route.path) {
-      results.push({
-        path: r.route.path,
-        url: url.resolve(fullUrl, r.route.path),
-        methods: r.route.methods,
-      });
-    }
-  });
-  res.json({ response: results });
-});
-
 // Routes
-require('./routes/projects')(app);
-require('./routes/paperedits')(app);
-require('./routes/transcripts')(app);
-require('./routes/labels')(app);
-require('./routes/annotations')(app);
+require('./routes/index')(app);
 require('./routes/status')(app);
+require('./routes/projects')(app);
+require('./routes/transcripts')(app);
+require('./routes/paperedits')(app);
+require('./routes/annotations')(app);
+require('./routes/labels')(app);
 require('./routes/queue')(app);
 
 app.use((err, req, res, next) => {
