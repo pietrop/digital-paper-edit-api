@@ -19,13 +19,13 @@ module.exports = (app) => {
       title: req.body.title,
       description: req.body.description,
       id: cuid(),
-      created: Date()
-    }
+      created: Date(),
+    };
     sampleProjects.projects.push(project);
 
     // TODO: send project ID?
     console.log('projects', 'post', '/api/projects ');
-    res.status(201).json({ status:'ok', project: project });
+    res.status(201).json({ status: 'ok', project });
   });
 
   // index - get projects
@@ -41,9 +41,7 @@ module.exports = (app) => {
     const projectId = req.params.projectId;
     // TODO: db
     // tmpProject.project = sampleProjects.projects[parseInt(req.params.projectId)];
-    const tmpProject = sampleProjects.projects.filter((p) => {
-      return p.id === projectId;
-    });
+    const tmpProject = sampleProjects.projects.filter(p => p.id === projectId);
     console.log('tmpProject', tmpProject[0]);
     console.log('projects', 'get', `/api/projects/${ req.params.projectId }`);
     res.status(200).json({ project: tmpProject[0] });
@@ -53,10 +51,10 @@ module.exports = (app) => {
   app.put('/api/projects/:projectId', (req, res) => {
     const projectId = req.params.projectId;
     const newProject = {
-      "id": projectId,
-        "title": req.body.title,
-        "description":req.body.description
-    }
+      id: projectId,
+      title: req.body.title,
+      description: req.body.description,
+    };
     const projectIndex = sampleProjects.projects.findIndex(item => item.id === projectId);
     sampleProjects.projects[projectIndex] = newProject;
 
@@ -66,26 +64,16 @@ module.exports = (app) => {
     // req.body.id || req.params.projectId
     // req.body.description
     console.log('projects', 'put', `/api/projects/${ req.params.projectId }/edit`, req.body);
-    console.log(newProject)
-    res.status(200).json({ status: 'ok' , project: newProject});
+    console.log(newProject);
+    res.status(200).json({ status: 'ok', project: newProject });
   });
 
-  // delete
-  app.delete('/api/projects/:projectId/', function (req, res) {
+  app.delete('/api/projects/:projectId/', (req, res) => {
     const projectId = req.params.projectId;
-    console.log(projectId);
-    const projectToDelete = sampleProjects.projects.filter((p) => {
-      return p.id === projectId;
-    })[0];
-    const projectToDeleteId = projectToDelete.id;
-    sampleProjects.projects = sampleProjects.projects.filter((p) => {
-      return p.id !== projectToDeleteId;
-    });
-     // Tmp to testing UI
-     delete projectToDelete;
-    // TODO: db
-    // TODO: filter sampleProjects for those that don't match ?
+    const projectToDelete = sampleProjects.projects.find(p => p.id === projectId);
+    sampleProjects.projects = sampleProjects.projects.filter(p => p.id !== projectToDelete.id);
+
     console.log('projects', 'deleted', `/api/projects/${ projectToDelete }`);
-    res.status(200).json({ status: 'ok' });
+    res.status(204).json({ status: 'ok' });
   });
 };
