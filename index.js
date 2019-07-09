@@ -23,9 +23,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// TODO: Add API versioning, and change "SDK" React client side
-
-// list all available rotues
 app.get('/', (req, res) => {
   const fullUrl = `${ req.protocol }://${ req.get('host') }${ req.originalUrl }`;
   const results = [];
@@ -50,6 +47,18 @@ require('./routes/labels')(app);
 require('./routes/annotations')(app);
 require('./routes/status')(app);
 require('./routes/queue')(app);
+
+app.use((err, req, res, next) => {
+  console.log('err');
+  const statusCode = err.statusCode || 500;
+  const errorMessage = err.message || 'Something went wrong!';
+
+  res.status(statusCode)
+    .json({
+      status: statusCode,
+      message: errorMessage,
+    });
+});
 
 app.listen(port, () => console.log(`App listening on port ${ port }!`));
 

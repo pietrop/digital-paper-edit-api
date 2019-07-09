@@ -10,14 +10,7 @@ const sampleTranscriptMorgan = require('../sample-data/transcripts/morgan.transc
 const sampleTranscriptIvan = require('../sample-data/transcripts/ivan.transcript.sample.json');
 const sampleTranscriptInProgress = require('../sample-data/transcripts/in-progress.transcript.sample.json');
 
-const sampleTranscriptsList = [
-  sampleTranscriptKate,
-  sampleTranscriptMorgan,
-  sampleTranscriptIvan,
-  sampleTranscriptInProgress,
-];
-
-console.log(sampleTranscriptsList);
+const sampleTranscripts = [ sampleTranscriptKate, sampleTranscriptMorgan, sampleTranscriptIvan, sampleTranscriptInProgress ];
 
 module.exports = (app) => {
   app.post('/api/projects/:projectId/transcripts', (req, res, next) => {
@@ -72,9 +65,15 @@ module.exports = (app) => {
     const projectId = req.params.projectId;
     const transcriptId = req.params.transcriptId;
 
-    const transcript = sampleTranscriptsList.find(t => t.id === transcriptId);
+    // TODO: rewrite so isn't reading from manual array.
+    const transcript = sampleTranscripts.find(t => t.id === transcriptId);
 
-    if (!transcript) return next(new Error(`No transcript found for ${ transcriptId }`));
+    if (!transcript) {
+      const err = new Error('No transcript found');
+      err.statusCode = 404;
+
+      return next(err);
+    }
 
     console.log('transcripts', 'get', `/api/projects/${ projectId }/transcripts/${ transcriptId }`);
 
