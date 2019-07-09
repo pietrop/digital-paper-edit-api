@@ -1,22 +1,20 @@
 // 'use strict';
+const url = require('url');
 const express = require('express');
 const bodyParser = require('body-parser');
-const url = require('url');
 
 const app = express();
 const router = express.Router();
 
+const port = process.env.PORT || 8080;
+
 require('./config');
 
-// https://stackoverflow.com/questions/24543847/req-body-empty-on-posts
-// https://github.com/expressjs/body-parser#limit
-// > Controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the bytes library for parsing. Defaults to '100kb'.
 app.use(bodyParser.json( { limit: '50MB' } ));
 
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
-const port = process.env.PORT || 8080;
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -45,18 +43,14 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-require('./routes/projects.js')(app);
-require('./routes/paperedits.js')(app);
-require('./routes/transcripts.js')(app);
-require('./routes/labels.js')(app);
-require('./routes/annotations.js')(app);
-// TODO: status should probably not always return ok?
-// eg if server is failing/crashed should return something else
-// so that the instance can be terminated? or is not necessary to do this explicitly?
-
-const status = require('./routes/status');
-
-app.get('/status', status.healthCheck);
-app.get('/queue', status.sendMessage);
+require('./routes/projects')(app);
+require('./routes/paperedits')(app);
+require('./routes/transcripts')(app);
+require('./routes/labels')(app);
+require('./routes/annotations')(app);
+require('./routes/status')(app);
+require('./routes/queue')(app);
 
 app.listen(port, () => console.log(`App listening on port ${ port }!`));
+
+module.exports = app;
