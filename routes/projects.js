@@ -1,5 +1,5 @@
 const cuid = require('cuid');
-const logger = require('winston');
+const logger = require('../lib/logger.js');
 
 const data = require('../sample-data/projects.sample.json');
 

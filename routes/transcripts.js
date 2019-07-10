@@ -1,7 +1,7 @@
 const path = require('path');
 const cuid = require('cuid');
 const formidable = require('formidable');
-const logger = require('winston');
+const logger = require('../lib/logger.js');
 
 const data = require('../sample-data/transcripts.sample.json');
 

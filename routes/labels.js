@@ -1,5 +1,5 @@
 const cuid = require('cuid');
-const logger = require('winston');
+const logger = require('../lib/logger.js');
 const sampleLabels = require('../sample-data/labels.sample.json');
 
 module.exports = (app) => {

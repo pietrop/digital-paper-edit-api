@@ -1,6 +1,7 @@
 const cuid = require('cuid');
 const samplePaperEdits = require('../sample-data/paper-edits.sample.json');
 const sampleProgrammeScript = require('../sample-data/programme-script.sample.json');
+const logger = require('../lib/logger.js');
 
 module.exports = (app) => {
 

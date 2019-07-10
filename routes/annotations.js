@@ -1,14 +1,15 @@
 const cuid = require('cuid');
-const logger = require('winston');
+const logger = require('../lib/logger.js');
 const sampleAnnotations = require('../sample-data/annotations.sample.json');
 
-module.exports = (app, version) => {
+module.exports = (app) => {
   app.post('/api/projects/:projectId/transcripts/:transcriptId/annotations', (req, res) => {
     const newAnnotation = req.body;
     newAnnotation.id = cuid();
     sampleAnnotations.annotations.push(newAnnotation);
-    res.status(201).json({ status: 'ok', annotation: newAnnotation });
-    logger.info(`POST: Annotation ${ newAnnotation.id } for transcript ${ req.params.transcriptId } in project ${ req.params.projectId }`);
+    const resStatus = 201;
+    res.status(resStatus).json({ status: 'ok', annotation: newAnnotation });
+    logger.info({ status: resStatus, request: 'POST', message: `New annotation ${ newAnnotation.id } created for transcript ${ req.params.transcriptId } in project ${ req.params.projectId }` });
   });
 
   app.get('/api/projects/:projectId/transcripts/:transcriptId/annotations', (req, res) => {

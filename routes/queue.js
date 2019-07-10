@@ -1,4 +1,4 @@
-const logger = require('winston');
+const logger = require('../lib/logger.js');
 const messageBroker = require('../lib/messageBroker');
 
 module.exports = (app) => {
