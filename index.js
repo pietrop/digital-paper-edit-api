@@ -1,17 +1,14 @@
+require('./config');
+
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-
 const port = process.env.PORT || 8080;
 
-require('./config');
-
 app.use(bodyParser.json( { limit: '50MB' } ));
-
-app.use(bodyParser.urlencoded({
-  extended: true,
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -20,15 +17,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
-require('./routes/index')(app);
-require('./routes/status')(app);
-require('./routes/projects')(app);
-require('./routes/transcripts')(app);
-require('./routes/paperedits')(app);
-require('./routes/annotations')(app);
-require('./routes/labels')(app);
-require('./routes/queue')(app);
+// Import routes folder
+const routePath = './routes/';
+const routes = fs.readdirSync(routePath).filter(file => (/.js$/).test(file));
+
+// eslint-disable-next-line global-require, import/no-dynamic-require
+routes.forEach(route => require(routePath + route)(app));
 
 app.use((err, req, res, next) => {
   console.log('err');
