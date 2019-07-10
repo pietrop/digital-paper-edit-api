@@ -1,10 +1,11 @@
 const url = require('url');
+const logger = require('../lib/logger/index.js');
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
     const fullUrl = `${ req.protocol }://${ req.get('host') }${ req.originalUrl }`;
+    logger.info(`Full url: ${ fullUrl }`);
     const results = [];
-    // https://stackoverflow.com/questions/14934452/how-to-get-all-registered-routes-in-express/14934933
     app._router.stack.forEach((r) => {
       if (r.route && r.route.path) {
         results.push({
