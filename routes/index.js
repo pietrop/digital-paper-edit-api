@@ -1,5 +1,5 @@
 const url = require('url');
-const logger = require('../lib/logger/index.js');
+const logger = require('../lib/logger.js');
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
