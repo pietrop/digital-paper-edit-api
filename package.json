@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests --recursive",
+    "test": "mocha ./tests --recursive --exit",
     "start": "node index.js",
     "publish:public": "npm publish --access public",
     "start:dev": "nodemon index.js",
