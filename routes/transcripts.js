@@ -38,7 +38,8 @@ module.exports = (app) => {
         return next(err);
       });
 
-    form.parse(req, (err, fields, file) => {
+    form.parse(req, (err, fields) => {
+      console.log('fields::', fields);
       const newTranscript = {
         title: fields.title,
         description: fields.description,
