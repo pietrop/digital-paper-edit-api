@@ -1,5 +1,7 @@
 const cuid = require('cuid');
 
+const logger = require('../lib/logger.js');
+
 const data = require('../sample-data/annotations.sample.json');
 
 module.exports = (app) => {
@@ -10,14 +12,14 @@ module.exports = (app) => {
     data.annotations.push(newAnnotation);
 
     res.status(201).json({ status: 'ok', annotation: newAnnotation });
-    console.log('/api/projects/:projectId/transcripts/:transcriptId/annotations');
+    logger.info({ status: 201, request: 'POST', message: `New annotation ${ newAnnotation.id } created for transcript ${ req.params.transcriptId } in project ${ req.params.projectId }` });
   });
 
   app.get('/api/projects/:projectId/transcripts/:transcriptId/annotations', (req, res) => {
     const projectId = req.params.projectId;
     const transcriptId = req.params.transcriptId;
 
-    console.log('labels', 'get', `/api/projects/${ projectId }/transcripts/${ transcriptId }/annotations`);
+    logger.info(`GET: Annotations for transcript ${ transcriptId } in project ${ projectId }`);
     res.status(200).json({
       ...data,
     });
@@ -29,10 +31,10 @@ module.exports = (app) => {
     const annotationId = req.params.annotationId;
 
     const annotationIndex = data.annotations.findIndex(item => item.id === annotationId);
-    const tmpAnnotation = data.annotations[annotationIndex];
+    const annotation = data.annotations[annotationIndex];
 
-    console.log('labels', 'get', `/api/projects/${ projectId }}/transcripts/${ transcriptId }/annotations/${ annotationId }`);
-    res.status(200).json( { annotation: tmpAnnotation });
+    logger.info(`GET: Annotation ${ annotationId } for transcript ${ transcriptId } in project ${ projectId }`);
+    res.status(200).json( { annotation });
   });
 
   app.put('/api/projects/:projectId/transcripts/:transcriptId/annotations/:annotationId', (req, res) => {
@@ -44,8 +46,7 @@ module.exports = (app) => {
     const annotationIndex = data.annotations.findIndex(item => item.id === annotationId);
     data.annotations[annotationIndex] = updatedAnnotation;
 
-    console.log('deleted', projectId, transcriptId, annotationId);
-    console.log(`/api/projects/${ projectId }/transcripts/:transcriptId/annotations`);
+    logger.info(`PUT: Edit annotation ${ annotationId } for transcript ${ transcriptId } in project ${ projectId }`);
     res.status(200).json({ status: 'ok', annotation: updatedAnnotation });
   });
 
@@ -56,7 +57,7 @@ module.exports = (app) => {
 
     data.annotations = data.annotations.filter(item => item.id !== annotationId);
 
-    console.log('deleted', projectId, transcriptId, annotationId);
+    logger.info(`DELETE: Annotation ${ annotationId } for transcript ${ transcriptId } in project ${ projectId }`);
     res.status(200).json({ status: 'ok' });
   });
 };

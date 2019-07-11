@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests --recursive",
+    "test": "mocha ./tests --recursive --exit",
     "start": "node index.js",
     "publish:public": "npm publish --access public",
     "start:dev": "nodemon index.js",
@@ -29,7 +29,10 @@
     "cuid": "^2.1.6",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "formidable": "^1.2.1"
+    "formidable": "^1.2.1",
+    "morgan": "^1.9.1",
+    "winston": "^3.2.1",
+    "winston-cloudwatch": "^2.0.5"
   },
   "devDependencies": {
     "aws-sdk-mock": "^4.5.0",

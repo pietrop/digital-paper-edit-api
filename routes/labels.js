@@ -1,5 +1,7 @@
 const cuid = require('cuid');
 
+const logger = require('../lib/logger.js');
+
 const data = require('../sample-data/labels.sample.json');
 
 module.exports = (app) => {
@@ -10,14 +12,14 @@ module.exports = (app) => {
     const projectId = req.params.projectId;
     data.labels.push(newLabel);
 
-    console.log('labels', 'post', `/api/projects/${ projectId }/labels`);
+    logger.info(`POST: Label ${ newLabel.id } for project ${ projectId }`);
     res.status(201).json({ status: 'ok', labels: data.labels });
   });
 
   app.get('/api/projects/:projectId/labels', (req, res) => {
     const projectId = req.params.projectId;
 
-    console.log('labels', 'get', `/api/projects/${ projectId }/labels`);
+    logger.info(`GET: Labels for project ${ projectId }`);
     res.status(200).json({ status: 'ok', labels: data.labels });
   });
 
@@ -26,10 +28,10 @@ module.exports = (app) => {
     const labelId = req.params.labelId;
 
     const annotationIndex = data.labels.findIndex(item => item.id === labelId);
-    const tmpLabel = data.labels[annotationIndex];
+    const label = data.labels[annotationIndex];
 
-    console.log('labels', 'get', `/api/projects/${ projectId }/labels/${ labelId }`);
-    res.status(200).json({ label: tmpLabel });
+    logger.info(`GET: Label ${ labelId } for project ${ projectId }`);
+    res.status(200).json({ label });
   });
 
   app.put('/api/projects/:projectId/labels/:labelId', (req, res) => {
@@ -42,7 +44,7 @@ module.exports = (app) => {
     const labelIndex = data.labels.findIndex(item => item.id === labelId);
     data.labels[labelIndex] = updatedLabel;
 
-    console.log('labels', 'put', `/api/projects/${ projectId }/labels/${ labelId }`);
+    logger.info(`PUT: Edit label ${ labelId } for project ${ projectId }`);
     res.status(200).json({ status: 'ok', labels: data.labels });
   });
 
@@ -52,7 +54,7 @@ module.exports = (app) => {
 
     data.labels = data.labels.filter(l => l.id !== labelId);
 
-    console.log('labels', 'delete', `/api/projects/${ projectId }/labels/${ labelId }`);
+    logger.info(`DELETE: Label ${ labelId } for project ${ projectId }`);
     res.status(200).json({ status: 'ok', labels: data.labels });
   });
 };

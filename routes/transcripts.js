@@ -1,7 +1,7 @@
-// Dummy data to mock the server
 const path = require('path');
 const cuid = require('cuid');
 const formidable = require('formidable');
+const logger = require('../lib/logger.js');
 
 const data = require('../sample-data/transcripts.sample.json');
 
@@ -28,12 +28,12 @@ module.exports = (app) => {
         file.path = path.join(form.uploadDir, file.name);
       })
       .on('error', (err) => {
-        console.error('error: ', err);
+        logger.error(`Job failed: project ${ projectId }, due to ${ err }`);
 
         return next(err);
       })
       .on('aborted', (err) => {
-        console.error('error: ', err);
+        logger.error(`Aborted job for project ${ projectId }, due to ${ err }`);
 
         return next(err);
       });
@@ -48,16 +48,14 @@ module.exports = (app) => {
       };
 
       data.transcripts.push(newTranscript);
-
-      console.log('transcripts', 'new', `/api/projects/${ projectId }/transcripts`, newTranscriptId);
+      logger.info(`POST: transcript ${ newTranscriptId } for project ${ projectId }`);
       res.status(201).json({ status: 'ok', transcript: newTranscript });
     });
   });
 
   app.get('/api/projects/:projectId/transcripts', (req, res) => {
     const projectId = req.params.projectId;
-
-    console.log('transcripts', 'get', `/api/projects/${ projectId }/transcripts`);
+    logger.info(`GET: transcripts for project ${ projectId }`);
     res.status(200).json(data);
   });
 
@@ -65,17 +63,17 @@ module.exports = (app) => {
     const projectId = req.params.projectId;
     const transcriptId = req.params.transcriptId;
 
-    // TODO: rewrite so isn't reading from manual array.
     const transcript = sampleTranscripts.find(t => t.id === transcriptId);
 
     if (!transcript) {
       const err = new Error('No transcript found');
       err.statusCode = 404;
+      logger.error(`${ err.statusCode }: Transcript ${ transcriptId } not found for project ${ projectId }`);
 
       return next(err);
     }
 
-    console.log('transcripts', 'get', `/api/projects/${ projectId }/transcripts/${ transcriptId }`);
+    logger.info(`GET — Transcript ${ transcriptId } from project ${ projectId }`);
 
     return res.status(200).json(transcript);
   });
@@ -93,7 +91,7 @@ module.exports = (app) => {
     const transcriptIndex = data.transcripts.findIndex(item => item.id === transcriptId);
     data.transcripts[transcriptIndex] = updatedTranscript;
 
-    console.log('transcripts', 'edit', `/api/projects/${ projectId }/transcripts/${ transcriptId }`, req.body);
+    logger.info(`PUT — New Transcript ${ transcriptId } for project ${ projectId }`);
     res.status(200).json({ transcript: updatedTranscript });
   });
 
@@ -103,7 +101,7 @@ module.exports = (app) => {
 
     data.transcripts = data.transcripts.filter(t => t.id !== transcriptId);
 
-    console.log('transcripts', 'deleted', `(/api/projects/${ projectId }/transcripts/${ transcriptId }`);
+    logger.info(`DELETE - Transcript ${ transcriptId } from project ${ projectId }`);
     res.status(204).json({ message: `DELETE: transcript ${ transcriptId }` });
   });
 };

@@ -1,4 +1,5 @@
 const cuid = require('cuid');
+const logger = require('../lib/logger.js');
 
 const data = require('../sample-data/projects.sample.json');
 
@@ -13,12 +14,12 @@ module.exports = (app) => {
 
     data.projects.push(project);
 
-    console.log('projects', 'post', '/api/projects ');
+    logger.info(`POST: New project ${ project.id }`);
     res.status(201).json({ status: 'ok', project });
   });
 
   app.get('/api/projects', (req, res) => {
-    console.log('projects', 'get', '/api/projects');
+    logger.info('GET: Projects');
     res.status(200).json(data);
   });
 
@@ -26,8 +27,7 @@ module.exports = (app) => {
     const projectId = req.params.projectId;
 
     const project = data.projects.find(p => p.id === projectId);
-
-    console.log('projects', 'get', `/api/projects/${ req.params.projectId }`);
+    logger.info(`GET: Project id ${ req.params.projectId }`);
     res.status(200).json({ project });
   });
 
@@ -43,7 +43,7 @@ module.exports = (app) => {
     const projectIndex = data.projects.findIndex(item => item.id === projectId);
     data.projects[projectIndex] = newProject;
 
-    console.log('projects', 'put', `/api/projects/${ req.params.projectId }/edit`, req.body);
+    logger.info(`PUT: Edit project id ${ req.params.projectId }`);
     res.status(200).json({ status: 'ok', project: newProject });
   });
 
@@ -53,7 +53,7 @@ module.exports = (app) => {
     const projectToDelete = data.projects.find(p => p.id === projectId);
     data.projects = data.projects.filter(p => p.id !== projectToDelete.id);
 
-    console.log('projects', 'deleted', `/api/projects/${ projectToDelete }`);
+    logger.info(`DELETE: Project id ${ projectId }`);
     res.status(204).json({ status: 'ok' });
   });
 };

@@ -4,6 +4,8 @@ const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const logger = require('./lib/logger.js');
+
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -25,10 +27,9 @@ const routes = fs.readdirSync(routePath).filter(file => (/.js$/).test(file));
 routes.forEach(route => require(routePath + route)(app));
 
 app.use((err, req, res, next) => {
-  console.log('err');
   const statusCode = err.statusCode || 500;
   const errorMessage = err.message || 'Something went wrong!';
-
+  logger.error(`Error: ${ statusCode } — ${ errorMessage }`);
   res.status(statusCode)
     .json({
       status: statusCode,
@@ -36,6 +37,5 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(port, () => console.log(`App listening on port ${ port }!`));
-
+app.listen(port, () => logger.info(`App listening on port ${ port }`));
 module.exports = app;

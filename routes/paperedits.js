@@ -1,5 +1,7 @@
 const cuid = require('cuid');
 
+const logger = require('../lib/logger.js');
+
 const data = require('../sample-data/paper-edits.sample.json');
 const samplePaperEdit = require('../sample-data/programme-script.sample.json');
 
@@ -14,7 +16,7 @@ module.exports = (app) => {
 
     data.paperedits.push(paperedit);
 
-    console.log('paperedits', 'post', '/api/projects/:projectId/paperedits');
+    logger.info(`POST: Paper edits for project ${ req.params.projectId }`);
     res.status(201).json({
       status: 'ok',
       paperedit,
@@ -40,7 +42,7 @@ module.exports = (app) => {
       return next(err);
     }
 
-    console.log('projects', 'get', `/api/projects/${ req.params.projectId }/paperedits/${ paperEditId }`);
+    logger.info(`GET: Paper edits for project ${ req.params.projectId }`);
 
     return res.status(200).json({
       status: 'ok',
@@ -60,7 +62,7 @@ module.exports = (app) => {
     const paperEditIndex = data.paperedits.findIndex(item => item.id === paperEditId);
     data.paperedits[paperEditIndex] = paperEdit;
 
-    console.log('projects', 'put', `/api/projects/${ req.params.paperEditId }/edit`, paperEdit);
+    logger.info(`PUT: Modify paper edit ${ req.params.paperEditId } for project ${ req.params.projectId }`);
     res.status(200).json({
       status: 'ok',
       paperedit: paperEdit,
@@ -70,12 +72,10 @@ module.exports = (app) => {
   app.delete('/api/projects/:projectId/paperedits/:paperEditId', (req, res) => {
     const paperEditId = req.params.paperEditId;
 
-    console.log('paperEditId::', paperEditId);
-
     const paperEditToDelete = data.paperedits.find(p => p.id === paperEditId);
     data.paperedits = data.paperedits.filter(p => p.id !== paperEditToDelete.id);
 
-    console.log('projects', 'deleted', `/api/projects/${ paperEditId }`);
+    logger.info(`DELETE: Paper edit ${ paperEditId } for project ${ req.params.projectId }`);
     res.status(204).json({ status: 'ok' });
   });
 };
