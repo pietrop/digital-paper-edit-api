@@ -28,10 +28,10 @@ module.exports = (app) => {
     const labelId = req.params.labelId;
 
     const annotationIndex = data.labels.findIndex(item => item.id === labelId);
-    const tmpLabel = data.labels[annotationIndex];
+    const label = data.labels[annotationIndex];
 
     logger.info(`GET: Label ${ labelId } for project ${ projectId }`);
-    res.status(200).json({ label: tmpLabel });
+    res.status(200).json({ label });
   });
 
   app.put('/api/projects/:projectId/labels/:labelId', (req, res) => {

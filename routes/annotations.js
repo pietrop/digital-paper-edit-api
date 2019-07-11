@@ -31,10 +31,10 @@ module.exports = (app) => {
     const annotationId = req.params.annotationId;
 
     const annotationIndex = data.annotations.findIndex(item => item.id === annotationId);
-    const tmpAnnotation = data.annotations[annotationIndex];
+    const annotation = data.annotations[annotationIndex];
 
     logger.info(`GET: Annotation ${ annotationId } for transcript ${ transcriptId } in project ${ projectId }`);
-    res.status(200).json( { annotation: tmpAnnotation });
+    res.status(200).json( { annotation });
   });
 
   app.put('/api/projects/:projectId/transcripts/:transcriptId/annotations/:annotationId', (req, res) => {
