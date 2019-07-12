@@ -38,4 +38,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => logger.info(`App listening on port ${ port }`));
+
 module.exports = app;
