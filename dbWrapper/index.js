@@ -30,7 +30,8 @@ class DWrapper {
   }
 
   delete(model, id) {
-    return this.diskdb[model].remove({ ...id });
+    // remove only the first match
+    return this.diskdb[model].remove({ ...id }, false);
   }
 
   // /**
