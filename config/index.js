@@ -7,11 +7,13 @@ if (result.error) {
   throw result.error;
 }
 
-try {
-  const envConfig = dotenv.parse(fs.readFileSync('.env.override'));
-  envConfig.forEach((k) => {
-    process.env[k] = envConfig[k];
-  });
-} catch (err) {
-  console.log('No override file found');
+if (process.env.NODE_ENV !== 'development') {
+  try {
+    const envConfig = dotenv.parse(fs.readFileSync('.env.override'));
+    envConfig.forEach((k) => {
+      process.env[k] = envConfig[k];
+    });
+  } catch (err) {
+    console.log('No override file found');
+  }
 }
