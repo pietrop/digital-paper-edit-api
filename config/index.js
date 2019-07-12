@@ -1,6 +1,8 @@
 const fs = require('fs');
 const dotenv = require('dotenv');
 
+const logger = require('../lib/logger');
+
 const result = dotenv.config();
 
 if (result.error) {
@@ -14,6 +16,6 @@ if (process.env.NODE_ENV !== 'development') {
       process.env[k] = envConfig[k];
     });
   } catch (err) {
-    console.log('No override file found');
+    logger.info('No override file found');
   }
 }

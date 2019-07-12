@@ -39,7 +39,8 @@ module.exports = (app) => {
       });
 
     form.parse(req, (err, fields) => {
-      console.log('fields::', fields);
+      logger.info(`INFO: Fields: ${ fields }`);
+
       const newTranscript = {
         title: fields.title,
         description: fields.description,

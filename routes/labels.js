@@ -39,7 +39,7 @@ module.exports = (app) => {
     const labelId = req.params.labelId;
 
     const updatedLabel = req.body;
-    console.log('updatedLabel', updatedLabel);
+    logger.info(`PUT: Label ${ labelId } for project ${ projectId }`);
 
     const labelIndex = data.labels.findIndex(item => item.id === labelId);
     data.labels[labelIndex] = updatedLabel;
