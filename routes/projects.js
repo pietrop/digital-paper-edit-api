@@ -1,4 +1,4 @@
-const cuid = require('cuid');
+// const cuid = require('cuid');
 const logger = require('../lib/logger.js');
 
 const db = require('../dbWrapper/index.js');
@@ -9,7 +9,8 @@ module.exports = (app) => {
     const projectData = {
       title: req.body.title,
       description: req.body.description,
-      // ID created by the dbWrapper
+      // ID created by the dbWrapper?
+      // _id: cuid(),
       created: Date(),
     };
     const project = db.create('projects', projectData);

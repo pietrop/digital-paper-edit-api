@@ -2,11 +2,11 @@ const db = require('./index.js');
 
 // console.log(db.getAll('projects'));
 
-const transcripts = db.getAll('transcripts');
+// const transcripts = db.getAll('transcripts');
 // console.log();
 // console.log(db.get('transcripts', { _id: transcripts[2]._id }));
 
-// console.log(db.get('projects','1cjw29xii80000ird74yb19swa'));
+console.log(db.get('transcripts', { projectId: '54bae8166afc4b379de5d4e10b77218d' }));
 
 // console.log(db.create('projects', {
 //   title: 'Project title One!',

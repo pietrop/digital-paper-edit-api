@@ -6,7 +6,11 @@ class DWrapper {
     this.diskdb = diskdb.connect(`${ process.cwd() }/dbWrapper/db`, [ 'projects', 'transcripts', 'annotations', 'labels', 'paperedits' ]);
   }
 
-  getAll(model) {
+  getAll(model, id) {
+    if (id) {
+      return this.diskdb[model].find({ ...id });
+    }
+
     return this.diskdb[model].find();
   }
 

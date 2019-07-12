@@ -3,14 +3,16 @@ const cuid = require('cuid');
 const formidable = require('formidable');
 const logger = require('../lib/logger.js');
 
-const data = require('../sample-data/transcripts.sample.json');
+const db = require('../dbWrapper/index.js');
 
-const sampleTranscriptKate = require('../sample-data/transcripts/kate.transcript.sample.json');
-const sampleTranscriptMorgan = require('../sample-data/transcripts/morgan.transcript.sample.json');
-const sampleTranscriptIvan = require('../sample-data/transcripts/ivan.transcript.sample.json');
-const sampleTranscriptInProgress = require('../sample-data/transcripts/in-progress.transcript.sample.json');
+// const data = require('../sample-data/transcripts.sample.json');
 
-const sampleTranscripts = [ sampleTranscriptKate, sampleTranscriptMorgan, sampleTranscriptIvan, sampleTranscriptInProgress ];
+// const sampleTranscriptKate = require('../sample-data/transcripts/kate.transcript.sample.json');
+// const sampleTranscriptMorgan = require('../sample-data/transcripts/morgan.transcript.sample.json');
+// const sampleTranscriptIvan = require('../sample-data/transcripts/ivan.transcript.sample.json');
+// const sampleTranscriptInProgress = require('../sample-data/transcripts/in-progress.transcript.sample.json');
+
+// const sampleTranscripts = [ sampleTranscriptKate, sampleTranscriptMorgan, sampleTranscriptIvan, sampleTranscriptInProgress ];
 
 module.exports = (app) => {
   app.post('/api/projects/:projectId/transcripts', (req, res, next) => {
@@ -56,6 +58,23 @@ module.exports = (app) => {
 
   app.get('/api/projects/:projectId/transcripts', (req, res) => {
     const projectId = req.params.projectId;
+    const data = {};
+
+    data.transcripts = db.getAll('transcripts', { projectId });
+
+    console.log('data.transcripts', data.transcripts);
+    if (data.transcripts) {
+      // data.transcripts = [ data.transcripts ];
+      data.transcripts = data.transcripts
+      // Temporary workaround.
+        .map((transcript) => {
+          transcript.id = transcript._id;
+
+          return transcript;
+        });
+    } else {
+      data.transcripts = [];
+    }
     logger.info(`GET: transcripts for project ${ projectId }`);
     res.status(200).json(data);
   });
