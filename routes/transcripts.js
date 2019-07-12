@@ -134,6 +134,6 @@ module.exports = (app) => {
     // data.transcripts = data.transcripts.filter(t => t.id !== transcriptId);
     db.delete('transcripts', { _id: transcriptId, projectId });
     logger.info(`DELETE - Transcript ${ transcriptId } from project ${ projectId }`);
-    res.status(204).json({ message: `DELETE: transcript ${ transcriptId }` });
+    res.status(204).json({ status: 'ok', message: `DELETE: transcript ${ transcriptId }` });
   });
 };
