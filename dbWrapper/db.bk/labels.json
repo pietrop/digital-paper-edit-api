@@ -1,6 +1,7 @@
 [
     {
       "_id": "default",
+      "id": "default",
       "projectId": "default",
       "value": "default",
       "label": "Default",
@@ -9,6 +10,7 @@
     },
     {
       "_id": "129cjw29xii80000ird74yb19swa",
+      "id": "129cjw29xii80000ird74yb19swa",
       "projectId": "94346281c4ad4938b7d0ae6fa9899bec",
       "value": "economics",
       "label": "Economics",
@@ -17,6 +19,7 @@
     },
     {
       "_id": "229cjw29xii80000ird74yb19swa",
+      "id": "229cjw29xii80000ird74yb19swa",
       "projectId": "94346281c4ad4938b7d0ae6fa9899bec",
       "value": "introduction",
       "label": "Introduction",
@@ -25,6 +28,7 @@
     },
     {
       "_id": "329cjw29xii80000ird74yb19swa",
+      "id": "329cjw29xii80000ird74yb19swa",
       "projectId": "94346281c4ad4938b7d0ae6fa9899bec",
       "value": "brexit",
       "label": "Brexit",
@@ -33,6 +37,7 @@
     },
     {
       "_id": "429cjw29xii80000ird74yb19swa",
+      "id": "429cjw29xii80000ird74yb19swa",
       "projectId": "94346281c4ad4938b7d0ae6fa9899bec",
       "value": "conclusion",
       "label": "Conclusion",
@@ -41,6 +46,7 @@
     },
     {
       "_id": "529cjw29xii80000ird74yb19swa",
+      "id": "529cjw29xii80000ird74yb19swa",
       "projectId": "94346281c4ad4938b7d0ae6fa9899bec",
       "value": "europe",
       "label": "Europe",
@@ -49,6 +55,7 @@
     },
     {
       "_id": "629cjw29xii80000ird74yb19swa",
+      "id": "629cjw29xii80000ird74yb19swa",
       "projectId": "94346281c4ad4938b7d0ae6fa9899bec",
       "value": "ritual",
       "label": "Ritual",
@@ -57,6 +64,7 @@
     },
     {
       "_id": "729cjw29xii80000ird74yb19swa",
+      "id": "729cjw29xii80000ird74yb19swa",
       "projectId": "94346281c4ad4938b7d0ae6fa9899bec",
       "value": "negotiation",
       "label": "Negotiation",
@@ -65,6 +73,7 @@
     },
     {
       "_id": "829cjw29xii80000ird74yb19swa",
+      "id": "829cjw29xii80000ird74yb19swa",
       "projectId": "94346281c4ad4938b7d0ae6fa9899bec",
       "value": "computer vision",
       "label": "Computer vision",
@@ -73,6 +82,7 @@
     },
     {
       "_id": "929cjw29xii80000ird74yb19swa",
+      "id": "929cjw29xii80000ird74yb19swa",
       "projectId": "94346281c4ad4938b7d0ae6fa9899bec",
       "value": "open source",
       "label": "Open Source",
