@@ -28217,13 +28217,22 @@
 			]
 		},
 		"description": "Ted Talk by Ivan Poupyrev "
-	},
-	{
-		"projectId": "54bae8166afc4b379de5d4e10b77218d",
-		"title": "Basically, we're pretty happy with it ",
-		"description": " W1A - Series 3 Episode 3 Preview - BBC Two-ONWNWBoqTuM.mp4",
+    },
+    {
+		"projectId": "94346281c4ad4938b7d0ae6fa9899bec",
+		"title": "Test Transcript One",
+		"description": "Example of in progress transcript",
 		"url": null,
 		"status": "in-progress",
 		"_id": "f5a8dc8c863243d19528e1eff60d91d9"
+    },
+    {
+		"projectId": "94346281c4ad4938b7d0ae6fa9899bec",
+		"title": "Test Transcript Two",
+		"description": "Example of transcript with an error",
+		"url": null,
+        "status": "error",
+        "errorMessage": "Some meaningfull error message that tells you why the transcript failed, and what to do about it",
+		"_id": "f5a8dc8c863243d19528e1eff60d91d8"
 	}
 ]
