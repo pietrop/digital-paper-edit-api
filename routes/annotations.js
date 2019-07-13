@@ -1,6 +1,4 @@
-// const cuid = require('cuid');
 const logger = require('../lib/logger.js');
-// const data = require('../sample-data/annotations.sample.json');
 const db = require('../dbWrapper/index.js');
 
 module.exports = (app) => {
@@ -12,9 +10,7 @@ module.exports = (app) => {
       transcriptId,
       ...req.body,
     };
-    // newAnnotation.id = cuid();
 
-    // data.annotations.push(newAnnotationData);
     const newAnnotation = db.create('annotations', newAnnotationData);
     newAnnotation.id = newAnnotation._id;
 
@@ -29,7 +25,6 @@ module.exports = (app) => {
     let annotations = db.getAll('annotations', { projectId, transcriptId });
     console.log(annotations);
     if (annotations) {
-      // data.transcripts = [ data.transcripts ];
       annotations = annotations
       // Temporary workaround.
         .map((annotation) => {
@@ -48,9 +43,6 @@ module.exports = (app) => {
     const projectId = req.params.projectId;
     const transcriptId = req.params.transcriptId;
     const annotationId = req.params.annotationId;
-
-    // const annotationIndex = data.annotations.findIndex(item => item.id === annotationId);
-    // const annotation = data.annotations[annotationIndex];
 
     const annotation = db.get('annotations', { _id: annotationId, projectId, transcriptId });//
     console.log('annotation', annotation);
@@ -75,10 +67,7 @@ module.exports = (app) => {
       ...req.body,
     };
 
-    const updated = db.update('annotations', { _id: annotationId, projectId, transcriptId }, annotationData);
-
-    // const annotationIndex = data.annotations.findIndex(item => item.id === annotationId);
-    // data.annotations[annotationIndex] = updatedAnnotation;
+    db.update('annotations', { _id: annotationId, projectId, transcriptId }, annotationData);
 
     logger.info(`PUT: Edit annotation ${ annotationId } for transcript ${ transcriptId } in project ${ projectId }`);
     res.status(200).json({ status: 'ok', annotation: annotationData });
@@ -90,7 +79,6 @@ module.exports = (app) => {
     const annotationId = req.params.annotationId;
 
     db.delete('annotations', { _id: annotationId, projectId, transcriptId });
-    // data.annotations = data.annotations.filter(item => item.id !== annotationId);
 
     logger.info(`DELETE: Annotation ${ annotationId } for transcript ${ transcriptId } in project ${ projectId }`);
     res.status(200).json({ status: 'ok' });
