@@ -1,1 +1,13 @@
-[{"title":"Ted Talks","description":"Ted Talks - sample project","_id":"94346281c4ad4938b7d0ae6fa9899bec"},{"title":"Test project","description":"A test project","_id":"54bae8166afc4b379de5d4e10b77218d","id":"54bae8166afc4b379de5d4e10b77218d"}]
+[
+	{
+		"title": "Ted Talks",
+		"description": "Ted Talks - sample project",
+		"_id": "94346281c4ad4938b7d0ae6fa9899bec"
+	},
+	{
+		"title": "Test project",
+		"description": "A test project",
+		"_id": "54bae8166afc4b379de5d4e10b77218d",
+		"id": "54bae8166afc4b379de5d4e10b77218d"
+	}
+]

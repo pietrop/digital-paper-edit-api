@@ -27,3 +27,18 @@ console.log(db.get('transcripts', { projectId: '54bae8166afc4b379de5d4e10b77218d
 
 // console.log(db.delete('projects',
 //   { _id: 'a16ca3fbb8e44db19494bdda4ca757ae' }));
+
+const labelId = '829cjw29xii80000ird74yb19swa';
+const projectId = '94346281c4ad4938b7d0ae6fa9899bec';
+const labelData = {
+  _id: '829cjw29xii80000ird74yb19swa',
+  projectId: '94346281c4ad4938b7d0ae6fa9899bec',
+  value: 'computer vision ',
+  label: 'Computer vision Changed!',
+  color: '#253858',
+  description: 'Computer Vision Description',
+};
+
+const updated = db.update('labels', { _id: labelId, projectId }, labelData);
+
+console.log(updated);
