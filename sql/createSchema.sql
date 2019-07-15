@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS "users_transcripts" (
 
 CREATE TABLE IF NOT EXISTS "users_paper_edits" (
 	"id" serial NOT NULL,
-	"user_id" serial NOT NULL,
+	"user_id" text NOT NULL,
 	"paper_edit_id" serial NOT NULL,
 	"created_at" timestamp with time zone NOT NULL,
 	"updated_at" timestamp with time zone NOT NULL,
