@@ -34,6 +34,8 @@ npm install
 
 alternatively for production is also on [npm](https://www.npmjs.com/package/@bbc/digital-paper-edit-api)
 
+Make sure to update your .env file. 
+
 ## Usage - development
 
 ```
@@ -41,6 +43,37 @@ npm run start:dev
 ```
  
 Server API is listening on [`http://localhost:7080`](http://localhost:7080)
+
+### Database
+
+Before connecting to the RDS, you must SSH into a Cosmos component that has been granted permission to communicate with the RDS in its policy. Run:
+
+```
+ssh -f -L [port]:[rds name]:[port] [ssh] -N
+```
+#### Migrations
+First, make sure you've installed Knex.js globally:
+
+```
+npm install knex -g
+```
+
+Then run:
+```
+knex migrate:latest
+```
+
+To roll back:
+```
+knex migrate:rollback
+```
+
+#### Seeding
+After running the migration, populate the database with test data using:
+
+```
+knex seed:run
+```
 
 ## Usage - production
 
