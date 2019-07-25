@@ -1,7 +1,7 @@
 const diskdb = require('diskdb');
 
 /* eslint-disable class-methods-use-this */
-class DWrapper {
+class DBWrapper {
   constructor() {
     this.diskdb = diskdb.connect(`${ process.cwd() }/dbWrapper/db`, [ 'projects', 'transcripts', 'annotations', 'labels', 'paperedits' ]);
   }
@@ -34,6 +34,6 @@ class DWrapper {
     return this.diskdb[model].remove({ ...id }, false);
   }
 }
-const db = new DWrapper();
+const db = new DBWrapper();
 Object.freeze(db);
 module.exports = db;
