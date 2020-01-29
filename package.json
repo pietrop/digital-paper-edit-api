@@ -10,17 +10,17 @@
     "start:dev": "nodemon index.js",
     "spec": "speculate --release ${BUILD_NUMBER}"
   },
-  "author": "Pietro Passarelli CC0 BBC 2019",
+  "author": "Pietro Passarelli CC0 2019",
   "contributors": [
     ""
   ],
   "bugs": {
-    "url": "https://github.com/bbc/digital-paper-edit-api/issues"
+    "url": "https://github.com/pietrop/digital-paper-edit-api/issues"
   },
-  "homepage": "https://github.com/bbc/digital-paper-edit-api",
+  "homepage": "https://github.com/pietrop/digital-paper-edit-api",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bbc/digital-paper-edit-api.git"
+    "url": "git+https://github.com/pietrop/digital-paper-edit-api.git"
   },
   "license": "MIT",
   "dependencies": {
