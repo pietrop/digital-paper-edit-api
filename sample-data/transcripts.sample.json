@@ -5,39 +5,51 @@
         "id": "19cjw29xii80000ird74yb19swa",
         "title": "Kate Darling Ted Talk",
         "description": "Transcript zero description",
-        "status": "done"
+        "status": "done",
+        "sttEngine": "AssemblyAI",
+        "clipName": "KateDarling_2018S-950k.mp4"
       },
       {
         "id": "29cjw29xii80000ird74yb19swa",
         "title": "Morgan Vague Ted Talk",
         "description": "Transcript one description",
-        "status": "done"
+        "status": "done",
+        "sttEngine": "deepspeech",
+        "clipName": "MorganVague_2018X.mp4"
       },
       {
         "id": "39cjw29xii80000ird74yb19swa",
         "title": "Ivan Poupyrev Ted Talk",
         "description": "Transcript two description",
-        "status": "done"
+        "status": "done",
+        "sttEngine": "Speechmatics",
+        "clipName": "IvanPoupyrev_2019.mp4"
       },
       {
         "id": "49cjw29xii80000ird74yb19swa",
         "title": "Transcript title 3",
         "description": "Transcript 3 description",
-        "status": "in-progress"
+        "status": "in-progress",
+        "sttEngine": "pocketsphinx",
+        "clipName": "example.mp4"
       },
       {
         "id": "59cjw29xii80000ird74yb19swa",
         "title": "Transcript title four",
         "description": "Transcript 4 description brexit",
         "status": "error",
-        "errorMessage": "Wasn't able to complete the transcription"
+        "errorMessage": "Wasn't able to complete the transcription",
+        "sttEngine": "pocketsphinx",
+        "clipName": "example.mp4"
       },
       {
         "id": "69cjw29xii80000ird74yb19swa",
         "title": "Transcript title five",
         "description": "Transcript five description brexit",
         "status": "error",
-        "errorMessage": "Wasn't able to complete the transcription 2"
+        "errorMessage": "Wasn't able to complete the transcription 2",
+        "sttEngine": "deepspeech",
+        "clipName": "example.mov"
       }
     ]
   }
