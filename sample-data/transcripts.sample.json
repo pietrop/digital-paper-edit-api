@@ -29,9 +29,7 @@
         "id": "49cjw29xii80000ird74yb19swa",
         "title": "Transcript title 3",
         "description": "Transcript 3 description",
-        "status": "in-progress",
-        "sttEngine": "pocketsphinx",
-        "clipName": "example.mp4"
+        "status": "in-progress"
       },
       {
         "id": "59cjw29xii80000ird74yb19swa",
